@@ -35,7 +35,7 @@ const Container = styled.div`
 const CardImageWrapper = styled.div`
   position: absolute;
   top: -230px;
-  left: -5px;
+  left: -5;
   width: 200px;
   height: 280px;
   ${mobile({ position: 'absolute', top: '-200px', left: '45px' })}

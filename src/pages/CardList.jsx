@@ -81,9 +81,9 @@ const CardList = ({ searchText, selectedCardHandler, filterState }) => {
         });
     };
     getCards();
-  }, [page]);
+  }, [perPage, page]);
 
-  //filtering
+  //filtering for Search Text
   const filterCards = () => {
     let sortedCards = cardList;
     if (searchText) {
@@ -95,7 +95,7 @@ const CardList = ({ searchText, selectedCardHandler, filterState }) => {
         }
       });
     }
-
+    //filtering by price
     if (filterState.byPrice !== '') {
       sortedCards = cardList.sort((a, b) =>
         filterState.byPrice === 'lowtohigh'
@@ -105,6 +105,7 @@ const CardList = ({ searchText, selectedCardHandler, filterState }) => {
             a.cardmarket.prices.averageSellPrice
       );
     }
+    //filtering by types
     if (filterState.byType !== '') {
       sortedCards = cardList.sort((a, b) =>
         filterState.byType === 'ascending'
@@ -112,6 +113,7 @@ const CardList = ({ searchText, selectedCardHandler, filterState }) => {
           : b.types - a.types
       );
     }
+    //filtering by rarity
     if (filterState.byRarity !== '') {
       sortedCards = cardList.sort((a, b) =>
         filterState.byRarity === 'descending'
@@ -124,6 +126,7 @@ const CardList = ({ searchText, selectedCardHandler, filterState }) => {
   return (
     <Container>
       <CardListWrapper>
+        {/*Iteration cards */}
         {filterCards().map((card) => (
           <Card
             card={card}

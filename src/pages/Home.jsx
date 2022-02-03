@@ -4,15 +4,17 @@ import Navbar from '../components/Navbar';
 import Search from '../components/Search';
 import CardList from './CardList';
 const Home = () => {
+  //for getting selected card
   const [selectedCard, setSelectedCard] = useState([]);
   //console.log(selectedCard);
   const selectedCardHandler = (data) => {
     setSelectedCard([...selectedCard, { eachCount: 1, ...data }]);
   };
+
   //for searching
   const [searchText, setSearchText] = useState('');
 
-  //for filter
+  //using useReducer hook for filter by price or set , rarity and type
   const filterReducer = (state, action) => {
     switch (action.type) {
       case 'SORT_BY_PRICE':
@@ -25,12 +27,12 @@ const Home = () => {
         return state;
     }
   };
-
   const [filterState, filterDispatch] = useReducer(filterReducer, {
     byType: '',
     byRarity: '',
     byPrice: '',
   });
+
   return (
     <>
       <Navbar />
