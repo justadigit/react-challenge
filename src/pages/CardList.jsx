@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
 
+import { mobile } from '../responsive';
+
 // Creating React Element with Styled-components
 const Container = styled.div`
   padding: 20px 20px;
@@ -14,6 +16,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${mobile({ width: '80%' })}
 `;
 const CardListWrapper = styled.div`
   width: 100%;
@@ -21,6 +24,14 @@ const CardListWrapper = styled.div`
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
+  ${mobile({
+    width: '100%',
+    padding: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  })}
 `;
 const ShowMore = styled.button`
   padding: 10px 20px;

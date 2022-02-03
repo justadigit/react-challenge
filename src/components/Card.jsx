@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import { CountContext } from '../App';
 import styled from 'styled-components';
 // import SAMPLE from '../assets/images/1.png';
+
+import { mobile } from '../responsive';
+
 const Container = styled.div`
   width: 23%;
   height: 150px;
@@ -18,21 +21,34 @@ const Container = styled.div`
   position: relative;
   overflow: visible;
   clear: both;
+  ${mobile({
+    width: '70%',
+    height: '120px',
+    marginLeft: '0',
+    marginRight: '0',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+  })}
 `;
 const CardImageWrapper = styled.div`
   position: absolute;
   top: -230px;
-  left: -5;
+  left: -5px;
   width: 200px;
   height: 280px;
+  ${mobile({ position: 'absolute', top: '-200px', left: '45px' })}
 `;
 const CardImage = styled.img`
   width: 100%;
+  ${mobile({ width: '80%' })}
 `;
 const CardName = styled.span`
   font-size: 1.3em;
   font-weight: bold;
   margin-top: 35px;
+  ${mobile({ marginTop: '5px' })}
 `;
 const CardRarity = styled.span`
   color: blue;

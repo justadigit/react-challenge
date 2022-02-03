@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import LOGO from '../assets/images/logo.png';
+
+// for responsive mobile
+import { mobile } from '../responsive';
+
 //creating react elments with styled-components
 const Container = styled.div`
   position: fixed;
@@ -15,6 +19,7 @@ const Container = styled.div`
   -webkit-box-shadow: 0px 8px 15px 4px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 8px 15px 4px rgba(0, 0, 0, 0.05);
   z-index: 1;
+  ${mobile({ height: '150px' })}
 `;
 const Title = styled.h1`
   padding-top: 30px;

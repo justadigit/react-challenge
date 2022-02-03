@@ -8,6 +8,8 @@ import {
 import React, { useState, useContext } from 'react';
 import { CountContext } from '../App';
 import styled from 'styled-components';
+
+import { mobile } from '../responsive';
 //import SAMPLE from '../assets/images/1.png';
 const Container = styled.div`
   position: fixed;
@@ -68,6 +70,7 @@ const Modal = styled.div`
   background-color: white;
   -webkit-box-shadow: 0px 8px 15px 4px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 8px 15px 4px rgba(0, 0, 0, 0.05);
+  ${mobile({ width: '80%', height: '580px' })}
 `;
 const ModalItemWrapper = styled.div`
   height: 100%;
