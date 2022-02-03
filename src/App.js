@@ -5,6 +5,7 @@ function App() {
   const [countBadge, setcountBadge] = useState(0);
   const [totalCards, setTotalCards] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [start, setStart] = useState(false);
   return (
     <CountContext.Provider
       value={[
@@ -14,6 +15,7 @@ function App() {
         setTotalCards,
         totalPrice,
         setTotalPrice,
+        setStart,
       ]}
     >
       <Home />

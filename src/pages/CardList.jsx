@@ -36,7 +36,7 @@ const Icon = styled.span`
   }
   margin-right: 3px;
 `;
-const CardList = ({ selectedCardHandler }) => {
+const CardList = ({ searchText, selectedCardHandler, filterState }) => {
   //Calling UseState to get Data from API
 
   // limit pages at first
@@ -72,10 +72,48 @@ const CardList = ({ selectedCardHandler }) => {
     getCards();
   }, [page]);
 
+  //filtering
+  const filterCards = () => {
+    let sortedCards = cardList;
+    if (searchText) {
+      sortedCards = cardList.filter((card) => {
+        if (searchText === '') {
+          return card;
+        } else if (card.name.toLowerCase().includes(searchText.toLowerCase())) {
+          return card;
+        }
+      });
+    }
+
+    if (filterState.byPrice !== '') {
+      sortedCards = cardList.sort((a, b) =>
+        filterState.byPrice === 'lowtohigh'
+          ? a.cardmarket.prices.averageSellPrice -
+            b.cardmarket.prices.averageSellPrice
+          : b.cardmarket.prices.averageSellPrice -
+            a.cardmarket.prices.averageSellPrice
+      );
+    }
+    if (filterState.byType !== '') {
+      sortedCards = cardList.sort((a, b) =>
+        filterState.byType === 'ascending'
+          ? a.types - b.types
+          : b.types - a.types
+      );
+    }
+    if (filterState.byRarity !== '') {
+      sortedCards = cardList.sort((a, b) =>
+        filterState.byRarity === 'descending'
+          ? a.rarity - b.rarity
+          : b.rarity - a.rarity
+      );
+    }
+    return sortedCards;
+  };
   return (
     <Container>
       <CardListWrapper>
-        {cardList.map((card) => (
+        {filterCards().map((card) => (
           <Card
             card={card}
             key={card.id}

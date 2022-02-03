@@ -29,43 +29,58 @@ const SearchText = styled.input`
 const SearchType = styled.select`
   color: lightgray;
   font-weight: 200;
-  padding: 10px 8px;
+  padding: 10px 4px;
   margin-left: 2px;
   border: none;
   border-top-right-radius: ${(props) =>
-    props.value === 'rightmost' ? '20px' : ''};
+    props.itemType === 'rightmost' ? '20px' : ''};
   border-bottom-right-radius: ${(props) =>
-    props.value === 'rightmost' ? '20px' : ''};
+    props.itemType === 'rightmost' ? '20px' : ''};
   box-shadow: 3px 5px 15px 1px rgba(0, 0, 0, 0.08);
 `;
 const TypeItem = styled.option`
   font-weight: 200;
 `;
-const Search = () => {
+const Search = ({ searchText, setSearchText, filterDispatch }) => {
   return (
     <Container>
       <SearchWrapper>
-        <SearchText type="text" placeholder="Name..." />
-        <SearchType>
+        <SearchText
+          type="text"
+          placeholder="Name..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <SearchType
+          onChange={(e) =>
+            filterDispatch({ type: 'SORT_BY_TYPE', payload: e.target.value })
+          }
+        >
           <TypeItem>Type</TypeItem>
-          <TypeItem>A</TypeItem>
-          <TypeItem>B</TypeItem>
-          <TypeItem>c</TypeItem>
-          <TypeItem>d</TypeItem>
+          <TypeItem value="ascending">Asc</TypeItem>
+          <TypeItem value="descending">Desc</TypeItem>
         </SearchType>
-        <SearchType>
+        <SearchType
+          onChange={(e) =>
+            filterDispatch({
+              type: 'SORT_BY_RARITY',
+              payload: e.target.value,
+            })
+          }
+        >
           <TypeItem>Rarity</TypeItem>
-          <TypeItem>A</TypeItem>
-          <TypeItem>B</TypeItem>
-          <TypeItem>c</TypeItem>
-          <TypeItem>d</TypeItem>
+          <TypeItem value="ascending">Asc</TypeItem>
+          <TypeItem value="descending">Desc</TypeItem>
         </SearchType>
-        <SearchType value="rightmost">
+        <SearchType
+          itemType={'rightmost'}
+          onChange={(e) =>
+            filterDispatch({ type: 'SORT_BY_PRICE', payload: e.target.value })
+          }
+        >
           <TypeItem>Set</TypeItem>
-          <TypeItem>A</TypeItem>
-          <TypeItem>B</TypeItem>
-          <TypeItem>c</TypeItem>
-          <TypeItem>d</TypeItem>
+          <TypeItem value="lowtohigh">Low to High</TypeItem>
+          <TypeItem value="hightolow">High to Low</TypeItem>
         </SearchType>
       </SearchWrapper>
     </Container>
